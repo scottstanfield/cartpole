@@ -1,4 +1,4 @@
-name: bonsai
+name: csebonsai
 dependencies:
 - python=3.6
 - pip
