@@ -1,17 +1,9 @@
-name: csebonsai
+name: bonsai
 dependencies:
 - python=3.6
 - pip
-- git
-- jupyterlab
-- jupyter_console
-- ipykernel
-- nb_conda
-- matplotlib
-- plotly
 - pip:
-  - seaborn
   - bonsai-cli
   - bonsai-gym
   - bonsai-ai
-  - cufflinks
+
