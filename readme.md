@@ -1,47 +1,65 @@
-# Steps for Linux
+# Install Bonsai CLI + Anaconda on Linux
 
-1. Install miniconda
+### 1. Install Miniconda 
 
-```
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O mini.sh
-sh mini.sh
-```
+Miniconda just installs the core scripts, and pulls down the necessary
+packages when requested. The full Anaconda pre-pulls all packages and
+consumes ~3 GB.
 
-2. Clone this repo https://github.com/scottstanfield/bonsai-bootstrap
-```
+Note: https://aka.ms/miniconda.sh redirects to
+https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh.
+The shortened name here is easier to type.
+
+```bash
 cd ~
+wget aka.ms/miniconda.sh
+sh miniconda.sh -b
+rm miniconda.sh
+```
+
+### 2. Clone Limited Preview starter 
+
+Repository: https://github.com/scottstanfield/bonsai-bootstrap
+
+```bash
 git clone https://github.com/scottstanfield/bonsai-bootstrap
 ```
 
-3. Setup your `bonsai` Anaconda/Python environment with this command:
+### 3. Create the bonsai Anaconda environment
 
-```
-	cd ~/bonsai-bootstrap
-	conda env create -f environment.yml
-	conda activate bonsai
+```bash
+cd ~/bonsai-bootstrap
+conda env create -f environment.yml
+conda activate bonsai
 ```
 
-> temporary steps for Azure AD integration
+### 4. Temporary steps for Azure AD integration
 
-a) Create a stub ~/.bonsai that points to the right cloud
-```
-cat > ~/.bonsai <<EOD
+This section will be obsolete will change on **Wed, Aug 21, 2019**.
+
+a) Create a stub `~/.bonsai` that points to the right cloud
+
+```bash
+cat >> ~/.bonsai <<EOD
 [DEFAULT]
 url=https://mumouarm-api.azdev.bons.ai
 EOD
 ```
 
-b) tie client with AAD
-```
+b) Start the one-time AAD authentication
+
+```bash
 bonsai -a configure
 ```
 
-c) generate new key from https://web-master.azdev.bons.ai/?cloud=mumouarm
+c) Generate new key from https://web-master.azdev.bons.ai/?cloud=mumouarm
 
-d) verify:
-```
+Note: when you paste the key into the client, it won't echo the
+characters to the screen. But you still need to hit enter after pasting.
+
+d) Verify:
+
+```bash
 bonsai list
 ```
 
-
-7. Rename `brains` to `.brains`
