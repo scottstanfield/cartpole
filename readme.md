@@ -3,7 +3,7 @@
 ### 1. Install Miniconda 
 
 Miniconda just installs the core scripts, and pulls down the necessary
-packages when requested. The full Anaconda pre-pulls all packages and
+packages when requested. The full Anaconda [downloads all packages][1] and
 consumes ~3 GB.
 
 Note: https://aka.ms/miniconda.sh redirects to
@@ -63,3 +63,5 @@ d) Verify:
 bonsai list
 ```
 
+
+[1]: http://deeplearning.lipingyang.org/2018/12/23/anaconda-vs-miniconda-vs-virtualenv/
