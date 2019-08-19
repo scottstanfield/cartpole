@@ -52,6 +52,10 @@ b) Start the one-time AAD authentication
 bonsai -a configure
 ```
 
+Note: if you've authenticated before, there's a chance the CLI will ask
+you to got to http://mumouarm-api.azdev.bons.ai/accounts/settings/key
+resulting in a 404 error. Go to step c).
+
 c) Generate new key from https://web-master.azdev.bons.ai/?cloud=mumouarm
 
 Note: when you paste the key into the client, it won't echo the
