@@ -6,4 +6,5 @@ dependencies:
   - bonsai-cli
   - bonsai-gym
   - bonsai-ai
+  - scipy
 
