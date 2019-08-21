@@ -67,5 +67,18 @@ d) Verify:
 bonsai list
 ```
 
+# Cartpole instructions
+
+
+```bash
+conda activate bonsai
+cd cartpole
+bonsai create cart-0820-2
+bonsai push
+bonsai train start
+python hub.py --render
+bonsai train stop
+```
+
 
 [1]: http://deeplearning.lipingyang.org/2018/12/23/anaconda-vs-miniconda-vs-virtualenv/
