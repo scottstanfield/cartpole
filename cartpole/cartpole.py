@@ -58,10 +58,13 @@ class CartPole:
     def reset(self):
         """ Reset the model of a cartpole system to it's initial conditions
         """
-        self.x         = random.uniform(-0.05, 0.05)
-        self.x_dot     = random.uniform(-0.05, 0.05)
-        self.theta     = random.uniform(-0.05, 0.05)
-        self.theta_dot = random.uniform(-0.05, 0.05)
+        self.x         = 0
+        self.x_dot     = 0
+
+        self.theta     = random.uniform(-0.35, 0.35)
+        self.theta_dot = 0
+
+        print(f'theta {self.theta}')
 
     @property
     def state(self):
