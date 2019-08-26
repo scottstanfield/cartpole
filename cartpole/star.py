@@ -11,7 +11,7 @@ from bonsai_ai.logger import Logger
 
 log = Logger()
 
-THETA_MAX = 45 * 2 * math.pi / 360
+THETA_MAX = 25 * 2 * math.pi / 360
 X_MAX = 2.4
 
 def state(model_state):
@@ -32,6 +32,7 @@ def terminal(model_state):
         terminals (when the model is in a successful state)
     """
     # position, velocity, angle, rotation
+    #print(model_state)
     x, x_dot, theta, theta_dot = model_state
 
     # Terminal occurs when the cart's position is too far to the left or right
@@ -51,10 +52,12 @@ def reward(model_state, done):
     """
     return 1
 
+    ##
+    ## Not used but leaving here for now
+    ##
+
     # If the AI has not hit a terminal situation reward it with a score of 1.0
-
     x, x_dot, theta, theta_dot = model_state
-
     #bonus = my_norm.pdf(x)
     penalty = x / 2
 

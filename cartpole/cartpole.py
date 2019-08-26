@@ -14,22 +14,26 @@ class CartPole:
     """ Model for the dynamics of an inverted pendulum
     """
     def __init__(self):
-        self.gravity = 9.8
-        self.masscart = 1.0
-        self.masspole = 0.1
-        self.total_mass = (self.masspole + self.masscart)
-        self.length = 0.5  # actually half the pole's length
+        self.gravity         = 9.8
+        self.masscart        = 1.0
+        self.masspole        = 0.1
+        self.total_mass      = (self.masspole + self.masscart)
+        self.length          = 0.5  # actually half the pole's length
         self.polemass_length = (self.masspole * self.length)
-        self.force_mag = 10.0
-        self.tau = 0.02  # seconds between state updates
-
-        # Old thresholds used in earlier version for self termination
-        # Now termination is moved outside of simulator
-
-        # self.theta_threshold_radians = 12 * 2 * math.pi / 360
-        self.x_threshold = 2.4
+        self.force_mag       = 10.0
+        self.tau             = 0.02  # seconds between state updates
 
         self.reset()
+
+    def reset(self):
+        """ Reset the model of a cartpole system to it's initial conditions
+        """
+        self.x         = 0
+        self.x_dot     = 0
+
+        # +/- ~10 degrees off the vertical
+        self.theta     = random.uniform(-0.15, 0.15)
+        self.theta_dot = 0
 
     def step(self, action):
         """ Move the state of the cartpole simulation forward one time unit
@@ -48,23 +52,12 @@ class CartPole:
         xacc = (
             temp - self.polemass_length * thetaacc * costheta / self.total_mass
         )
-        self.x += self.tau * self.x_dot
-        self.x_dot += self.tau * xacc
-        self.theta += self.tau * self.theta_dot
+        self.x         += self.tau * self.x_dot
+        self.x_dot     += self.tau * xacc
+        self.theta     += self.tau * self.theta_dot
         self.theta_dot += self.tau * thetaacc
 
         return self.state
-
-    def reset(self):
-        """ Reset the model of a cartpole system to it's initial conditions
-        """
-        self.x         = 0
-        self.x_dot     = 0
-
-        self.theta     = random.uniform(-0.35, 0.35)
-        self.theta_dot = 0
-
-        print(f'theta {self.theta}')
 
     @property
     def state(self):
