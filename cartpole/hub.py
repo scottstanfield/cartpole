@@ -5,20 +5,20 @@ This file contains the simulator that controls the cartpole model
 using actions from the Bonsai Platform
 """
 
-import sys
+import sys, os
 
-import bonsai_ai
+from bonsai_ai import Simulator, Brain, Config, logger
 import star
 from cartpole import CartPole
 from render import Viewer
 
-log = bonsai_ai.logger.Logger()
+log = logger.Logger()
 
-class CartpoleSimulator(bonsai_ai.Simulator):
+class CartpoleSimulator(Simulator):
 
-    def __init__(self, brain, name, config):
-        super(CartpoleSimulator, self).__init__(brain, name)
-        self.model = None
+    def __init__(self, brain, name, model):
+        super().__init__(brain, name)
+        self.model = model
 
     def episode_start(self, parameters=None):
         self.model.reset()
@@ -41,12 +41,13 @@ class CartpoleSimulator(bonsai_ai.Simulator):
 
 
 if __name__ == "__main__":
-    config = bonsai_ai.Config(sys.argv)
-    brain = bonsai_ai.Brain(config)
+    log.info(f'Process ID {os.getpid()}')
 
-    model = CartPole()
-    sim = CartpoleSimulator(brain, 'the_simulator', config)
-    sim.model = model
+    config    = Config(sys.argv)
+    brain     = Brain(config)
+
+    model     = CartPole()
+    sim       = CartpoleSimulator(brain, 'the_simulator', model)
 
     should_render = False
 
