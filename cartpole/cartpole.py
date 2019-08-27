@@ -8,7 +8,10 @@ import math
 import random
 from collections import namedtuple
 
-CartPoleState = namedtuple('CartPoleState', 'x x_dot y y_dot')
+DEG_PER_RAD = 0.0174533
+RAD_PER_DEG = 57.2958
+
+CartPoleState = namedtuple('CartPoleState', 'x x_dot theta theta_dot')
 
 class CartPole:
     """ Model for the dynamics of an inverted pendulum
@@ -17,13 +20,21 @@ class CartPole:
         self.gravity         = 9.8
         self.masscart        = 1.0
         self.masspole        = 0.1
-        self.total_mass      = (self.masspole + self.masscart)
         self.length          = 0.5  # actually half the pole's length
-        self.polemass_length = (self.masspole * self.length)
         self.force_mag       = 10.0
         self.tau             = 0.02  # seconds between state updates
 
         self.reset()
+
+    def __str__(self):
+        str = f"x:{self.state.x: .3f}  "\
+              f"ẋ:{self.state.x_dot: .4f}     "\
+              f"θ°:{self.state.theta * RAD_PER_DEG: > 8.3f}  "
+
+        return str
+
+    def __repr__(self):
+        return self.state
 
     def reset(self):
         """ Reset the model of a cartpole system to it's initial conditions
@@ -38,19 +49,22 @@ class CartPole:
     def step(self, action):
         """ Move the state of the cartpole simulation forward one time unit
         """
-        force = self.force_mag if action else -self.force_mag
-        costheta = math.cos(self.theta)
-        sintheta = math.sin(self.theta)
+        total_mass = self.masspole + self.masscart
+        polemass_length = (self.masspole * self.length)
+
+        force      = self.force_mag if action else -self.force_mag
+        costheta   = math.cos(self.theta)
+        sintheta   = math.sin(self.theta)
         temp = (
-            (force + self.polemass_length * self.theta_dot ** 2 * sintheta)
-            / self.total_mass)
+            (force + polemass_length * self.theta_dot ** 2 * sintheta)
+            / total_mass)
         thetaacc = (
             (self.gravity * sintheta - costheta * temp)
             / (self.length *
                (4.0/3.0 - self.masspole * costheta * costheta /
-                self.total_mass)))
+                total_mass)))
         xacc = (
-            temp - self.polemass_length * thetaacc * costheta / self.total_mass
+            temp - polemass_length * thetaacc * costheta / total_mass
         )
         self.x         += self.tau * self.x_dot
         self.x_dot     += self.tau * xacc
