@@ -11,71 +11,6 @@ from pyglet.gl import *
 RAD2DEG     = 57.29578
 X_THRESHOLD = 2.4
 
-def draw_cartpole(cartpole, screen_width):
-    """ Draws a cartpole on a screen, scaled to screen_width
-    """
-    # Compute size of cart and pole as a function of screen_width
-    world_width = X_THRESHOLD * 2
-    scale       = screen_width/world_width
-    carty       = 100  # TOP OF CART
-    polewidth   = 10.0
-    polelen     = scale * 1.0
-    cartwidth   = 50.0
-    cartheight  = 30.0
-
-    # Draw track
-    glColor4f(0,0,0,1.0)
-    glLineWidth(1.0)
-    glBegin(gl.GL_LINES)
-    glVertex2f(0, carty)
-    glVertex2f(screen_width, carty)
-    glEnd()
-
-    # Draw Cart
-    l, r, t, b = -cartwidth/2, cartwidth/2, cartheight/2, -cartheight/2
-    cartx = cartpole.x*scale+screen_width/2.0  # MIDDLE OF CART
-
-    glColor4f(0.,0.,0.,1.0)
-    glPushMatrix()  # Push Translation
-    glTranslatef(cartx, carty, 0)
-    glBegin(gl.GL_QUADS)
-    glVertex3f(l, b, 0)
-    glVertex3f(l, t, 0)
-    glVertex3f(r, t, 0)
-    glVertex3f(r, b, 0)
-    glEnd()
-
-    # Draw Pole
-    l, r, t, b = (
-        -polewidth/2,
-        polewidth/2,
-        polelen-polewidth/2,
-        -polewidth/2)
-
-    glColor4f(.8, .6, .4, 1.0)
-    glPushMatrix()  # Push Rotation
-    glRotatef(RAD2DEG * -cartpole.theta, 0, 0, 1.0)
-    glBegin(gl.GL_QUADS)
-    glVertex3f(l, b, 0)
-    glVertex3f(l, t, 0)
-    glVertex3f(r, t, 0)
-    glVertex3f(r, b, 0)
-    glEnd()
-    glPopMatrix()  # Pop Rotation
-
-    # Draw Axle
-    radius = polewidth/2
-    glColor4f(0.5, 0.5, 0.8, 1.0)
-    glBegin(gl.GL_POLYGON)
-    for i in range(12):
-        ang = 2 * math.pi * i / 12
-        x=math.cos(ang)*radius
-        y=math.sin(ang)*radius
-        glVertex3f(x, y, 0)
-    glEnd()
-    glPopMatrix()  # Pop Translation
-
-
 class Viewer(pyglet.window.Window):
     """ Window for rendering a visualization of the CartPole model.
     """
@@ -116,5 +51,69 @@ class Viewer(pyglet.window.Window):
         glClearColor(1, 1, 1, 1)
         self.clear()
 
-        draw_cartpole(self.model, self.width)
+        self.draw_cartpole(self.width)
+
+    def draw_cartpole(self, screen_width):
+        """ Draws a cartpole on a screen, scaled to screen_width
+        """
+        # Compute size of cart and pole as a function of screen_width
+        world_width = X_THRESHOLD * 2
+        scale       = screen_width/world_width
+        carty       = 100  # TOP OF CART
+        polewidth   = 10.0
+        polelen     = scale * 1.0
+        cartwidth   = 50.0
+        cartheight  = 30.0
+
+        # Draw track
+        glColor4f(0,0,0,1.0)
+        glLineWidth(1.0)
+        glBegin(gl.GL_LINES)
+        glVertex2f(0, carty)
+        glVertex2f(screen_width, carty)
+        glEnd()
+
+        # Draw Cart
+        l, r, t, b = -cartwidth/2, cartwidth/2, cartheight/2, -cartheight/2
+        cartx = self.model.x * scale + screen_width /2.0  # MIDDLE OF CART
+
+        glColor4f(0.,0.,0.,1.0)
+        glPushMatrix()  # Push Translation
+        glTranslatef(cartx, carty, 0)
+        glBegin(gl.GL_QUADS)
+        glVertex3f(l, b, 0)
+        glVertex3f(l, t, 0)
+        glVertex3f(r, t, 0)
+        glVertex3f(r, b, 0)
+        glEnd()
+
+        # Draw Pole
+        l, r, t, b = (
+            -polewidth/2,
+            polewidth/2,
+            polelen-polewidth/2,
+            -polewidth/2)
+
+        glColor4f(.8, .6, .4, 1.0)
+        glPushMatrix()  # Push Rotation
+        glRotatef(RAD2DEG * -self.model.theta, 0, 0, 1.0)
+        glBegin(gl.GL_QUADS)
+        glVertex3f(l, b, 0)
+        glVertex3f(l, t, 0)
+        glVertex3f(r, t, 0)
+        glVertex3f(r, b, 0)
+        glEnd()
+        glPopMatrix()  # Pop Rotation
+
+        # Draw Axle
+        radius = polewidth/2
+        glColor4f(0.5, 0.5, 0.8, 1.0)
+        glBegin(gl.GL_POLYGON)
+        for i in range(12):
+            ang = 2 * math.pi * i / 12
+            x=math.cos(ang)*radius
+            y=math.sin(ang)*radius
+            glVertex3f(x, y, 0)
+        glEnd()
+        glPopMatrix()  # Pop Translation
 
