@@ -16,8 +16,8 @@ log = logger.Logger()
 
 class CartpoleSimulator(Simulator):
 
-    def __init__(self, brain, name, model):
-        super().__init__(brain, name)
+    def __init__(self, brain, model):
+        super().__init__(brain, "the_simulator")      # string must match cartpole.ink
         self.model = model
 
     def episode_start(self, parameters=None):
@@ -43,11 +43,12 @@ class CartpoleSimulator(Simulator):
 if __name__ == "__main__":
     log.info(f'Process ID {os.getpid()}')
 
-    config    = Config(sys.argv)
+    config    = Config(sys.argv)        # Parses ~/.bonsai and .brains
     brain     = Brain(config)
 
     model     = CartPole()
-    sim       = CartpoleSimulator(brain, 'the_simulator', model)
+
+    sim       = CartpoleSimulator(brain, model)
 
     should_render = False
 
