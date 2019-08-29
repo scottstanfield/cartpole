@@ -1,7 +1,6 @@
 {
     "files": [
-        "*.ink",
-        "*.py"
+        "*.ink"
     ],
     "training": {
         "simulator": "custom"
