@@ -8,8 +8,8 @@ import math
 import random
 from collections import namedtuple
 
-DEG_PER_RAD = 0.0174533
-RAD_PER_DEG = 57.2958
+RAD_PER_DEG = 0.0174533
+DEG_PER_RAD = 57.2958
 
 State = namedtuple('State', 'x x_dot theta theta_dot')
 
@@ -36,7 +36,7 @@ class CartPole:
     def __str__(self):
         str = f"x:{self.state.x: .3f}  "\
               f"ẋ:{self.state.x_dot: .4f}     "\
-              f"θ°:{self.state.theta * RAD_PER_DEG: > 8.3f}  "
+              f"θ°:{self.state.theta * DEG_PER_RAD: > 8.3f}  "
         return str
 
     def __repr__(self):

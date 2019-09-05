@@ -11,8 +11,11 @@ from bonsai_ai import Simulator, Brain, Config, logger
 import star
 from cartpole import CartPole
 from render import Viewer
+import numpy as np
 
 log = logger.Logger()
+
+RAD_PER_DEG = 0.0174533
 
 class CartpoleSimulator(Simulator):
 
@@ -21,7 +24,8 @@ class CartpoleSimulator(Simulator):
         self.model = model
 
     def episode_start(self, parameters=None):
-        self.model.reset()
+        theta = np.random.uniform(-2 * RAD_PER_DEG, 2 * RAD_PER_DEG)        # +/- 2 degree sd in radians
+        self.model.reset(theta=theta)
         return star.state(self.model.state)
 
     def simulate(self, brain_action):
