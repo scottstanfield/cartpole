@@ -21,7 +21,7 @@ trap "handler" EXIT
 JOBS=${1:-4}
 
 for i in $(seq 1 $JOBS); do
-	sleepy.sh &
+	./sleepy.sh &
 done
 
 wait $(jobs -p)
