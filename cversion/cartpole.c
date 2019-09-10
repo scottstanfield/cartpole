@@ -1,6 +1,8 @@
 /*----------------------------------------------------------------------
  [Source: http://incompleteideas.net/sutton/book/code/pole.c]
 
+ [Anderson's version from 1987: https://www.cs.colostate.edu/~anderson/code/multilayer-pole.c]
+
     This file contains a simulation of the cart and pole dynamic system and 
  a procedure for learning to balance the pole.  Both are described in 
  Barto, Sutton, and Anderson, "Neuronlike Adaptive Elements That Can Solve
@@ -37,7 +39,7 @@ Changes:
 #define prob_push_right(s)      (1.0 / (1.0 + exp(-max(-50.0, min(s, 50.0)))))
 #define random                  ((float) rand() / (float)((1 << 31) - 1))
 
-#define N_BOXES         162         /* Number of disjoint boxes of state space. */
+#define N_BOXES     162         /* Number of disjoint boxes of state space. */
 #define ALPHA       1000        /* Learning rate for action weights, w. */
 #define BETA        0.5         /* Learning rate for critic weights, v. */
 #define GAMMA       0.95        /* Discount factor for critic. */
