@@ -2,6 +2,7 @@ name: bonsai
 dependencies:
 - python=3.7.4
 - pip
+- ipython
 - pip:
   - bonsai-cli
   - bonsai-gym
