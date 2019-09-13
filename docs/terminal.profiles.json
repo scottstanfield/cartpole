@@ -3,9 +3,9 @@
     {
         "alwaysShowTabs" : true,
         "copyOnSelect" : false,
-        "defaultProfile" : "{2c4de342-38b7-51cf-b940-2309a097f518}",
-        "initialCols" : 120,
-        "initialRows" : 80,
+        "defaultProfile" : "{00900745-def8-4775-9acd-12e6b1495e14}",
+        "initialCols" : 100,
+        "initialRows" : 40,
         "keybindings" : 
         [
             {
@@ -291,7 +291,7 @@
             "acrylicOpacity" : 0.5,
             "closeOnExit" : true,
             "colorScheme" : "Solarized Light",
-            "commandline" : "powershell.exe -ExecutionPolicy ByPass -NoExit -Command \"& 'C:\\Users\\johnalex\\anaconda3\\shell\\condabin\\conda-hook.ps1' ; conda activate 'C:\\Users\\johnalex\\anaconda3'\"",
+            "commandline" : "powershell.exe -ExecutionPolicy ByPass -NoExit -Command \"& 'C:\\Users\\bonsai\\anaconda3\\shell\\condabin\\conda-hook.ps1' ; conda activate 'C:\\Users\\bonsai\\anaconda3'\"",
             "cursorColor" : "#FF00FF",
             "cursorShape" : "filledBox",
             "fontFace" : "Consolas",
