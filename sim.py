@@ -49,9 +49,7 @@ if __name__ == "__main__":
 
     config    = Config(sys.argv)        # Parses ~/.bonsai and .brains
     brain     = Brain(config)
-
     model     = CartPole()
-
     sim       = CartpoleSimulator(brain, model)
 
     should_render = False
