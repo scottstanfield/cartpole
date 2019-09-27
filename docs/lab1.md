@@ -1,13 +1,15 @@
 # Lab 01 - Getting started with machine teaching using Cartpole and Bonsai
 
+> username: bonsai-lab
+> screenshots with Terminal
+
 In this lab, you'll be introduced to Machine teaching using Bonsai. You'll create a BRAIN to train the OpenAI Gym environment for Cartpole, a simple balance control problem.
 
 ## Setup
 
-1. Login to the lab instance with the following username and password:
-
-    * Username: bonsai
-    * Password: #Bonsai2019!
+1. Login to the lab instance using the username and password supplied in
+   the "Register for Lab" email.
+   
 
 ## Clone the Cartpole GitHub repo
 
