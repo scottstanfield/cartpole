@@ -34,11 +34,11 @@ class CartPole:
         return State(self.x, self.x_dot, self.theta, self.theta_dot)
 
     def __str__(self):
-        str = f"x:{self.state.x: .3f}  "\
+        s = f"x:{self.state.x: .3f}  "\
               f"ẋ:{self.state.x_dot: .4f}     "\
               f"θ°:{self.state.theta * DEG_PER_RAD: > 8.3f}  "\
               f"θv°:{self.state.theta_dot * DEG_PER_RAD: > 8.3f}  "
-        return str
+        return s
 
     def __repr__(self):
         return self.state
