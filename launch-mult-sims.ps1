@@ -1,4 +1,4 @@
-﻿Param(
+Param(
     [Parameter(Mandatory=$true)][string]$brain,
     [string]$simFileName = "sim.py",
     [int32]$spawnTotal=16
@@ -10,7 +10,7 @@ $Processes = @()
 #setup command args
 $args = $simFileName + " " + $brain 
 
-# sim loop
+
 For ($count=0; $count -lt $spawnTotal; $count++) {
   
 # PassThru allows us to pass created process info to variable
