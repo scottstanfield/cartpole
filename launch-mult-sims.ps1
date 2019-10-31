@@ -1,18 +1,17 @@
-﻿param (
-    [string]$brain 
+Param(
+    [Parameter(Mandatory=$true)][string]$brain,
+    [string]$simFileName = "sim.py",
+    [int32]$spawnTotal=16
 )
 
 # Create empty processes array
 $Processes = @()
 
-# sim file name - change as needed
-$simFileName = "sim.py"
-
 #setup command args
 $args = $simFileName + " " + $brain 
 
-# sim loop
-For ($count=0; $count -lt 16; $count++) {
+
+For ($count=0; $count -lt $spawnTotal; $count++) {
   
 # PassThru allows us to pass created process info to variable
   $Process = Start-Process python -ArgumentList $args -PassThru
@@ -22,17 +21,22 @@ For ($count=0; $count -lt 16; $count++) {
 
 }
 
-#Output loop to list all created subprocesses
-ForEach ($Process in $Processes)
+#Output loop to list all created subprocesses if verbose is used
+If ($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent)
 {
-    $id = $Process.Id
-    $name = $Process.Name
-  
-    Write-Host "Subprocess created. Subprocess name is $name, id is $id" 
-    
+    ForEach ($Process in $Processes)
+    {
+        $id = $Process.Id
+        $name = $Process.Name
+        Write-Host ""
+        Write-Host "Subprocess created. Subprocess name is $name, id is $id" -ForegroundColor DarkGreen
+        
+    }
 }
 
-Write-Host "*** Type exit and hit enter to kill this window and all sim subprocesses ***"
+Write-Host ""
+Write-Host "*** Type exit and hit enter to kill this window and all sim subprocesses ***" -ForegroundColor Red
+Write-Host ""
 
 # Use Register-EngineEvent and PowerShell.Exiting engine event to kill our sim instances ([System.Management.Automation.PsEngineEvent]::Exiting)
 # Piped to Out-Null to suppress output
